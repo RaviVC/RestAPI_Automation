@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+    stages {
+        stage('validate') {
+	   steps {
+                echo 'validating..'
+		git url: 'https://github.com/RaviVC/RestAPI_Automation.git'
+		bat label: '', script: 'mvn validate'
+           }
+        }
+		stage('compile') {
+	   steps {
+                echo 'compiling..'
+		bat label: '', script: 'mvn compile'
+           }
+        }
+		stage('RestAPI-Testing') {
+	   steps {
+                echo 'API test ..'
+		bat label: '', script: 'mvn test'	
+           }		
+        }
+    }
+}
+
+
+
+
